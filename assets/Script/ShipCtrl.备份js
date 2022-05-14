@@ -1,0 +1,199 @@
+// 船控制器
+
+var layer = cc.Class({ // 阴影层
+    name: "layer",
+    properties: {
+        node: { type: cc.Node, default: null }, // 本层节点
+        _x: 0, // 原始位置，隐藏属性
+        _y: 0,
+        _h: 10, // 层高度
+    },
+});
+
+var weapon = cc.Class({ // 武器组
+    name: "weapon",
+    properties: {
+        node: { type: cc.Node, default: null, displayName: "武器节点" },
+        _ctrl: null, // 控制器
+        _x: 0, // 原始位置，隐藏属性
+        _y: 0,
+        _h: 10, // 层高度
+        layer: { type: layer, default: null, displayName: "阴影" },
+    },
+});
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        shadowAngle: { type: cc.Float, default: 30, displayName: "阴影角度" },
+        shadowLength: { type: cc.Float, default: 10, displayName: "阴影长度" },
+        shadowLayer: { type: layer, default: [], displayName: "阴影层" },
+        weapon1: { type: weapon, default: [], displayName: "武器组1" },
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        this.addSpeed = 30; // 额定加速度
+        this.speed = 0;
+        this.maxSpeed = 150;
+
+        this.add舵角 = 0.2;
+        this.舵角 = 0;
+        this.max舵角 = 1;
+        // 船武绘图UI
+        this.shipGraphics = cc.find("Canvas/Player UI").getComponent(cc.Graphics);
+        // 数组长度记录
+        this.shadowLayerLen = this.shadowLayer.length;
+        this.weapon1Len = this.weapon1.length;
+        // 武器组1的总体参数
+        for (let i = 0; i < this.weapon1Len; i++) { // 获取控制组件
+            this.weapon1[i].ctrl = this.weapon1[i].node.getComponent("TurretTorpedoCtrl");
+            cc.log("武器控制组件" + this.weapon1[i].ctrl.turnSpeed);
+        }
+        this.weapon1ON = -1; // 当前开启的武器
+        this.weapon1AimV2 = cc.v2(0, 0); // 目标坐标
+        this.weapon1Aim = 0; // 目标瞄准方位
+        this.aimX = 0; // 瞄准坐标
+        this.aimY = 0;
+        this.aimC = 500; // 参数
+        this.weapon1ShootType = 0; // 射击状态，0停止，1瞄准，2开火
+        this.cdTxt = cc.find("Canvas/UI/UI-weapon/鱼雷").getComponent(cc.Label);
+        //粒子
+        // this.par1 = cc.find("Canvas/Player/Par1").getComponent(cc.ParticleSystem);
+        // this.maxPar = this.par1.emissionRate; // 记录最大粒子数量
+        // this.par1.speed = 0; // 速度和发射率归零
+        // this.par1.emissionRate = 0;
+        // cc.log("粒子" + this.par1.speed);
+        // 控制
+        this.ctrlSpeed = 0; // 控制块，0~1
+        this.ctrl舵角 = 0;
+        cc.log("船控制载入完成");
+    },
+
+    start() {
+        // // 记录主建筑阴影
+        // for (let i = 0; i < this.shadowLayerLen; i++) {
+        //     // 记录原始位置
+        //     this.shadowLayer[i]._x = this.shadowLayer[i].node.x;
+        //     this.shadowLayer[i]._y = this.shadowLayer[i].node.y;
+        //     cc.log("阴影层" + i + "(" + this.shadowLayer[i]._x + "," + this.shadowLayer[i]._y + ")");
+        // }
+        // // 记录武器组1阴影
+        // for (let i = 0; i < this.weapon1Len; i++) {
+        //     this.weapon1[i].layer._x = this.weapon1[i].layer.node.x;
+        //     this.weapon1[i].layer._y = this.weapon1[i].layer.node.y;
+        //     cc.log("武器组1阴影层" + i + "(" + this.weapon1[i].layer._x + "," + this.weapon1[i].layer._y + ")");
+        // }
+    },
+
+    ctrl(dt) {
+        // 应该达到的目标速度ds 舵角dd
+        let ds = this.ctrlSpeed * this.maxSpeed;
+        let dd = this.ctrl舵角 * this.max舵角;
+        // 速度控制
+        if (Math.abs(ds - this.speed) < 0.5)
+            this.speed = this.maxSpeed * this.ctrlSpeed;
+        else {
+            if (this.speed < ds)
+                this.speed += this.addSpeed * dt;
+            else
+                this.speed -= this.addSpeed * dt;
+        }
+        // 角度控制
+        if (Math.abs(dd - this.舵角) < 0.005)
+            this.舵角 = this.max舵角 * this.ctrl舵角;
+        else {
+            if (this.舵角 < dd)
+                this.舵角 += this.add舵角 * dt;
+            else
+                this.舵角 -= this.add舵角 * dt;
+        }
+    },
+
+    setReady1() { // 武器组1准备瞄准
+        this.weapon1ShootType = 1;
+        for (let i = 0; i < this.weapon1Len; i++) { // 找到一个cd已好的
+            if (this.weapon1[i].ctrl.nowCD <= 0) {
+                this.weapon1ON = i;
+                break;
+            }
+        }
+        if (this.weapon1ON != -1)
+            this.weapon1[this.weapon1ON].ctrl.setReady();
+    },
+    setAngle1(a, l) { // 设置武器组1角度。a角度，l长度。
+        this.weapon1Aim = a;
+        let shouldR = cc.misc.degreesToRadians(a + this.node.angle);
+        let len = cc.v2(l * this.aimC, 0);
+        let ll = len.rotate(shouldR);
+        this.aimX = ll.x + this.node.x;
+        this.aimY = ll.y + this.node.y;
+        // 从前往后检查武器组1
+        for (let i = 0; i < this.weapon1Len; i++) {
+            this.weapon1[i].ctrl.setXY(this.aimX, this.aimY);
+        }
+    },
+    setFire1() { // 武器组1射击
+        this.shipGraphics.clear(); // 清屏
+        this.weapon1ShootType = 0;
+        if (this.weapon1ON != -1) {
+            this.weapon1[this.weapon1ON].ctrl.setFire();
+            this.weapon1ON = -1;
+        }
+    },
+
+    draw() { // 绘制瞄准线
+        // 瞄准环
+        this.shipGraphics.lineWidth = 10; // 改变线宽
+        this.shipGraphics.strokeColor = new cc.color(255, 0, 0, 200);
+        this.shipGraphics.arc(this.aimX, this.aimY, 20,
+            0, 2 * Math.PI, false);
+        this.shipGraphics.stroke();
+        // 瞄准线
+        this.shipGraphics.lineWidth = 3;
+        this.shipGraphics.strokeColor = new cc.color(255, 0, 0, 200);
+        this.shipGraphics.moveTo(this.node.x, this.node.y);
+        this.shipGraphics.lineTo(this.aimX, this.aimY);
+        this.shipGraphics.stroke(); // 描边，fill();填充 
+    },
+
+    update(dt) {
+        this.ctrl(dt);
+        this.node.angle += this.舵角 * this.speed * dt * 0.1;
+        let dx = this.speed * Math.cos(this.node.angle * Math.PI / 180);
+        let dy = this.speed * Math.sin(this.node.angle * Math.PI / 180);
+        this.node.x += dx * dt;
+        this.node.y += dy * dt;
+        if (this.node.angle > 180) this.node.angle -= 360;
+        else if (this.node.angle < -180) this.node.angle += 360;
+        // 武器帧控制
+        if (this.weapon1ShootType == 1) { // 激活状态
+            this.shipGraphics.clear(); // 清屏
+            this.draw(); // 绘制
+        }
+        let str = "雷";
+        for (let i = 0; i < this.weapon1Len; i++) {
+            this.weapon1[i].ctrl.weaponUpdate(dt); // 手动调用帧更新
+            str += "|" + this.weapon1[i].ctrl.nowCD.toFixed(1);
+        }
+        this.cdTxt.string = str;
+        // 调整阴影位置
+        // let a = this.node.angle + this.shadowAngle;
+        // dx = this.shadowLength * Math.cos(a * Math.PI / 180);
+        // dy = this.shadowLength * Math.sin(a * Math.PI / 180);
+        // for (var i = 0; i < this.shadowLayerLen; i++) {
+        //     this.shadowLayer[i].node.x = this.shadowLayer[i]._x + dx;
+        //     this.shadowLayer[i].node.y = this.shadowLayer[i]._y - dy;
+        // }
+        // for (var i = 0; i < this.weapon1Len; i++) {
+        //     this.weapon1[i].layer.node.x = this.weapon1[i].layer._x + dx;
+        //     this.weapon1[i].layer.node.y = this.weapon1[i].layer._y - dy;
+        //     this.weapon1[i].layer.node.angle = this.weapon1[i].node.angle;
+        // }
+        // 调整粒子发射
+        // this.par1.emissionRate = this.maxPar * this.speed / this.maxSpeed;
+        // cc.log("位置(" + this.node.x + "," + this.node.y + ")");
+    },
+});

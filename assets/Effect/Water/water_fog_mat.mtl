@@ -1,0 +1,39 @@
+{
+  "__type__": "cc.Material",
+  "_name": "water_fog_mat",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "96511263-001d-4eee-a745-ef41b21293a8"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "tileZoom": 300,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 30,
+          "g": 67,
+          "b": 92,
+          "a": 255
+        },
+        "timeZoom": 0.05,
+        "normalZoom": 0.1,
+        "normalStre": 0.3,
+        "colorMul": 1,
+        "mainTexture": {
+          "__uuid__": "6d72512d-e7b2-4415-85c0-95dc6f4831f6"
+        },
+        "normalMap": {
+          "__uuid__": "40cead7f-fc53-4e89-8ae2-8080a95fdd94"
+        }
+      },
+      "defines": {
+        "USE_COLOR": true,
+        "USE_NORMALMAP": true,
+        "USE_FOG": true
+      }
+    }
+  }
+}

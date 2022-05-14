@@ -1,0 +1,167 @@
+{
+  "ver": "1.1.0",
+  "uuid": "23b1f73c-749f-48e6-b5a5-cd8539820400",
+  "scaleFactor": 1,
+  "boneCount": 0,
+  "precomputeJointMatrix": false,
+  "animationFrameRate": 30,
+  "subMetas": {
+    "buffer.bin": {
+      "ver": "1.0.0",
+      "uuid": "549c8502-8b77-409f-91f6-c04ea508b3c2",
+      "name": "buffer.bin",
+      "subMetas": {}
+    },
+    "Sphere001.mesh": {
+      "ver": "1.0.1",
+      "uuid": "aa5890c7-e3dd-469d-9c6a-b170797467c7",
+      "verts": 175,
+      "tris": 264,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -1042.63940429688,
+        "y": -1042.63928222656,
+        "z": 0
+      },
+      "maxPos": {
+        "x": 1042.63940429688,
+        "y": 1042.63952636719,
+        "z": 744.671936035156
+      },
+      "name": "Sphere001.mesh",
+      "subMetas": {}
+    },
+    "sky_model.prefab": {
+      "ver": "1.2.7",
+      "uuid": "93c02aa4-cfd9-4852-a7bf-b03c5606749d",
+      "optimizationPolicy": "AUTO",
+      "asyncLoadAssets": false,
+      "readonly": true,
+      "content": [
+        {
+          "__type__": "cc.Prefab",
+          "_name": "",
+          "_objFlags": 0,
+          "data": {
+            "__id__": 1
+          }
+        },
+        {
+          "__type__": "cc.Node",
+          "_name": "Sprite",
+          "_objFlags": 0,
+          "_opacity": 255,
+          "_color": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "_cascadeOpacityEnabled": true,
+          "_parent": null,
+          "_anchorPoint": {
+            "__type__": "cc.Vec2",
+            "x": 0.5,
+            "y": 0.5
+          },
+          "_contentSize": {
+            "__type__": "cc.Size",
+            "width": 40,
+            "height": 36
+          },
+          "_children": [],
+          "_skewX": 0,
+          "_skewY": 0,
+          "_localZOrder": 0,
+          "_globalZOrder": 0,
+          "_tag": -1,
+          "_opacityModifyRGB": false,
+          "_reorderChildDirty": false,
+          "_id": "",
+          "_active": true,
+          "_components": [
+            {
+              "__id__": 2
+            }
+          ],
+          "_prefab": {
+            "__id__": 3
+          },
+          "_eulerAngles": {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "_trs": {
+            "__type__": "TypedArray",
+            "ctor": "Float64Array",
+            "array": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "__type__": "cc.Sprite",
+          "_name": "",
+          "_objFlags": 0,
+          "node": {
+            "__id__": 1
+          },
+          "_enabled": true,
+          "_spriteFrame": {
+            "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+          },
+          "_type": 0,
+          "_sizeMode": 1,
+          "_fillType": 0,
+          "_fillCenter": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          },
+          "_fillStart": 0,
+          "_fillRange": 0,
+          "_isTrimmedMode": true,
+          "_srcBlendFactor": 770,
+          "_dstBlendFactor": 771,
+          "_atlas": null
+        },
+        {
+          "__type__": "cc.PrefabInfo",
+          "root": {
+            "__id__": 1
+          },
+          "asset": null,
+          "fileId": "d7118yAG5lKybkFOAh8koPL"
+        }
+      ],
+      "name": "sky_model.prefab",
+      "subMetas": {}
+    },
+    "Material #94.mtl": {
+      "ver": "1.0.3",
+      "uuid": "dec5ceb8-4e46-4edc-acf1-37693de89e84",
+      "dataAsSubAsset": "{\n  \"__type__\": \"cc.Material\",\n  \"_name\": \"\",\n  \"_objFlags\": 0,\n  \"_native\": \"\",\n  \"_effectAsset\": {\n    \"__uuid__\": \"5674ebbe-cd87-4d76-ae60-8a84053ceb1a\"\n  },\n  \"_techniqueIndex\": 0,\n  \"_techniqueData\": {\n    \"0\": {\n      \"props\": {},\n      \"defines\": {}\n    }\n  }\n}",
+      "name": "Material #94.mtl",
+      "subMetas": {}
+    }
+  }
+}

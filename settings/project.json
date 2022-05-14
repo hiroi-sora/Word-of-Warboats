@@ -1,0 +1,83 @@
+{
+  "group-list": [
+    "default",
+    "UI",
+    "ship",
+    "bullet",
+    "sky",
+    "map"
+  ],
+  "collision-matrix": [
+    [
+      false
+    ],
+    [
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      true,
+      null,
+      true
+    ],
+    [
+      false,
+      false,
+      true,
+      false,
+      null,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      true,
+      true,
+      false,
+      false
+    ]
+  ],
+  "excluded-modules": [
+    "Audio",
+    "AudioSource",
+    "Animation",
+    "VideoPlayer",
+    "WebView",
+    "3D Physics/cannon.js",
+    "3D Physics/Builtin",
+    "SafeArea"
+  ],
+  "preview-port": 7456,
+  "design-resolution-width": 960,
+  "design-resolution-height": 640,
+  "fit-width": false,
+  "fit-height": true,
+  "use-project-simulator-setting": false,
+  "simulator-orientation": false,
+  "use-customize-simulator": true,
+  "simulator-resolution": {
+    "height": 640,
+    "width": 960
+  },
+  "facebook": {
+    "appID": "",
+    "audience": {
+      "enable": false
+    },
+    "enable": false,
+    "live": {
+      "enable": false
+    }
+  },
+  "last-module-event-record-time": 1595930798072
+}

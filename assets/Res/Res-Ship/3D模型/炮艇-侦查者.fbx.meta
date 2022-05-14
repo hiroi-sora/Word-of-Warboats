@@ -1,0 +1,200 @@
+{
+  "ver": "1.1.0",
+  "uuid": "f05187d2-3247-4267-a5a8-5caf5319b98e",
+  "scaleFactor": 5,
+  "boneCount": 0,
+  "precomputeJointMatrix": false,
+  "animationFrameRate": 30,
+  "subMetas": {
+    "buffer.bin": {
+      "ver": "1.0.0",
+      "uuid": "e0fc6e12-25cb-4b34-9106-3c457ddd21b6",
+      "name": "buffer.bin",
+      "subMetas": {}
+    },
+    "船体.mesh": {
+      "ver": "1.0.1",
+      "uuid": "06a6fe1e-c58e-4364-9816-859339e0d985",
+      "verts": 515,
+      "tris": 270,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -0.0403975918889046,
+        "y": -0.011739406734705,
+        "z": -0.00471353577449918
+      },
+      "maxPos": {
+        "x": 0.0560918264091015,
+        "y": 0.011739406734705,
+        "z": 0.0148192727938294
+      },
+      "name": "船体.mesh",
+      "subMetas": {}
+    },
+    "主炮-小艇用.mesh": {
+      "ver": "1.0.1",
+      "uuid": "54906075-deb6-41fe-9207-3e5e3929e00b",
+      "verts": 554,
+      "tris": 324,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -0.00463181175291538,
+        "y": -0.0020528775639832,
+        "z": 0.000414101756177843
+      },
+      "maxPos": {
+        "x": 0.0113056870177388,
+        "y": 0.00207212241366506,
+        "z": 0.00549856433644891
+      },
+      "name": "主炮-小艇用.mesh",
+      "subMetas": {}
+    },
+    "炮艇-侦查者.prefab": {
+      "ver": "1.2.7",
+      "uuid": "55d9b0b3-f94d-4ef9-aae3-5072dd6e5e2f",
+      "optimizationPolicy": "AUTO",
+      "asyncLoadAssets": false,
+      "readonly": true,
+      "content": [
+        {
+          "__type__": "cc.Prefab",
+          "_name": "",
+          "_objFlags": 0,
+          "data": {
+            "__id__": 1
+          }
+        },
+        {
+          "__type__": "cc.Node",
+          "_name": "Sprite",
+          "_objFlags": 0,
+          "_opacity": 255,
+          "_color": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "_cascadeOpacityEnabled": true,
+          "_parent": null,
+          "_anchorPoint": {
+            "__type__": "cc.Vec2",
+            "x": 0.5,
+            "y": 0.5
+          },
+          "_contentSize": {
+            "__type__": "cc.Size",
+            "width": 40,
+            "height": 36
+          },
+          "_children": [],
+          "_skewX": 0,
+          "_skewY": 0,
+          "_localZOrder": 0,
+          "_globalZOrder": 0,
+          "_tag": -1,
+          "_opacityModifyRGB": false,
+          "_reorderChildDirty": false,
+          "_id": "",
+          "_active": true,
+          "_components": [
+            {
+              "__id__": 2
+            }
+          ],
+          "_prefab": {
+            "__id__": 3
+          },
+          "_eulerAngles": {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "_trs": {
+            "__type__": "TypedArray",
+            "ctor": "Float64Array",
+            "array": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "__type__": "cc.Sprite",
+          "_name": "",
+          "_objFlags": 0,
+          "node": {
+            "__id__": 1
+          },
+          "_enabled": true,
+          "_spriteFrame": {
+            "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+          },
+          "_type": 0,
+          "_sizeMode": 1,
+          "_fillType": 0,
+          "_fillCenter": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          },
+          "_fillStart": 0,
+          "_fillRange": 0,
+          "_isTrimmedMode": true,
+          "_srcBlendFactor": 770,
+          "_dstBlendFactor": 771,
+          "_atlas": null
+        },
+        {
+          "__type__": "cc.PrefabInfo",
+          "root": {
+            "__id__": 1
+          },
+          "asset": null,
+          "fileId": "d7118yAG5lKybkFOAh8koPL"
+        }
+      ],
+      "name": "炮艇-侦查者.prefab",
+      "subMetas": {}
+    },
+    "船色.mtl": {
+      "ver": "1.0.3",
+      "uuid": "58bc2eeb-4386-4244-b114-dc0383a8dc7f",
+      "dataAsSubAsset": "{\n  \"__type__\": \"cc.Material\",\n  \"_name\": \"\",\n  \"_objFlags\": 0,\n  \"_native\": \"\",\n  \"_effectAsset\": {\n    \"__uuid__\": \"abc2cb62-7852-4525-a90d-d474487b88f2\"\n  },\n  \"_techniqueIndex\": 0,\n  \"_techniqueData\": {\n    \"0\": {\n      \"props\": {\n        \"diffuseColor\": {\n          \"__type__\": \"cc.Color\",\n          \"r\": 111,\n          \"g\": 107,\n          \"b\": 94,\n          \"a\": 255\n        },\n        \"specularColor\": {\n          \"__type__\": \"cc.Color\",\n          \"r\": 163,\n          \"g\": 163,\n          \"b\": 163,\n          \"a\": 255\n        }\n      },\n      \"defines\": {}\n    }\n  }\n}",
+      "name": "船色.mtl",
+      "subMetas": {}
+    },
+    "武器色.mtl": {
+      "ver": "1.0.3",
+      "uuid": "45a35568-6b80-4484-b644-e6f5691cbb90",
+      "dataAsSubAsset": "{\n  \"__type__\": \"cc.Material\",\n  \"_name\": \"\",\n  \"_objFlags\": 0,\n  \"_native\": \"\",\n  \"_effectAsset\": {\n    \"__uuid__\": \"abc2cb62-7852-4525-a90d-d474487b88f2\"\n  },\n  \"_techniqueIndex\": 0,\n  \"_techniqueData\": {\n    \"0\": {\n      \"props\": {\n        \"diffuseColor\": {\n          \"__type__\": \"cc.Color\",\n          \"r\": 90,\n          \"g\": 90,\n          \"b\": 90,\n          \"a\": 255\n        }\n      },\n      \"defines\": {}\n    }\n  }\n}",
+      "name": "武器色.mtl",
+      "subMetas": {}
+    }
+  }
+}

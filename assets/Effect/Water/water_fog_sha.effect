@@ -1,0 +1,160 @@
+// 水面的shader
+CCEffect %{ 
+  techniques:
+  - name: opaque
+    passes:
+    - vert: my_vs # 顶点shader模块
+      frag: my_fs # 着色shader模块
+      depthStencilState: # 是否开启深度测试
+        depthTest: true
+        depthWrite: true
+      blendState:
+        targets:
+        - blend: true
+      rasterizerState:
+        cullMode: none # 背面剔除
+
+      # 属性列表，显示在材质球面板上
+      # 自定义属性的时候，除了要在properties这里定义，还要在shader代码里定义
+      properties: &props
+        timeZoom: { value: 1.0 } // 时间缩放
+        tileZoom: { value: 1.0 } // 平铺缩放
+        mainTexture: { value: white } // 主纹理
+        color: { value: [1, 1, 1, 1], inspector: { type: color } }
+        colorMul: { value: 1.0 } // 颜色乘数
+        normalMap: { value: white } // 法线贴图
+        normalZoom: { value: 1.0 } // 法线贴图缩放
+        normalStre: { value: 1.0 } // 法线扰动强度
+        # mainTiling: { value: [1, 1] } # 从Offset指定的起始位置开始，分别在X/Y轴，截取指定比列大小的原始贴图，作为输出贴图
+        # mainOffset: { value: [0, 0] } # 贴图UV坐标的起始位置，取值范围是0~1。
+        # 自定义属性：在shader代码里uniform UNLIT {......}; 里面定义。
+
+  # 不透明
+  - name: transparent 
+    passes: 
+      - stage: transparent
+        vert: my_vs
+        frag: my_fs
+        depthStencilState:
+          depthTest: true
+          depthWrite: true
+        blendState:
+          targets:
+          - blend: true
+        rasterizerState:
+          cullMode: none
+        properties: *props # 对TAML的锚点和引用，引用上面的片段
+}% // shader描述结束
+
+// 顶点描述
+CCProgram my_vs %{
+  precision highp float; // 定义float精度。GSLS里从高到低[highp,mediump,lowp]
+  uniform MAIN {
+    float tileZoom;
+  };
+  in vec3 a_position; // 从渲染管道里获取顶点位置
+  in vec2 a_uv0; // 顶点纹理坐标
+  out mediump vec2 v_uv0;
+  // 声明矩阵
+  #pragma builtin(local)
+  uniform CCLocal {
+    mat4 cc_matWorld; // 引擎绘制的时候根据物体的位置设置的矩阵
+    mat4 cc_matViewProj; // 绘制时由世界转到摄像机透视的矩阵
+    vec4 cc_cameraPos; // 摄像机位置xyz
+  };
+  // 开启雾效
+  #if USE_FOG
+    out float v_cameraDist; // 摄像机距离
+  #endif
+
+  void main () {
+    vec4 position = vec4(a_position,1.0);
+    // 开启雾效，计算该点与摄像机距离
+    #if USE_FOG
+      vec3 v_worldPos = (cc_matWorld * position).xyz;
+      vec3 vector = cc_cameraPos.xyz-v_worldPos;
+      v_cameraDist = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+    #endif
+    //fog
+    v_uv0 = a_uv0 * tileZoom;
+    gl_Position = cc_matViewProj * cc_matWorld * position; // 顶点变换
+  }
+}%
+
+
+// 着色描述
+CCProgram my_fs %{
+  precision highp float; // 要放在最前面
+  #pragma builtin(global)
+  uniform CCGlobal {
+    vec4 cc_time; // x：自启动以来的全局时间（秒），y：当前帧的增量时间，z：自启动以来的总帧数
+  };
+  uniform sampler2D mainTexture; // 主纹理图
+  in mediump vec2 v_uv0;
+  uniform SOMETHING {
+      float timeZoom;
+  };
+  // 勾选法线时启用
+  #if USE_NORMALMAP
+    uniform sampler2D normalMap; // 法线贴图
+    uniform NOR {
+      float normalZoom;
+      float normalStre;
+    };
+  #endif
+  // 勾选颜色时启用
+  #if USE_COLOR
+    uniform Constant {
+      vec4 color;
+      float colorMul;
+    };
+  #endif
+  // 开启雾效
+  #if USE_FOG
+    in float v_cameraDist; // 摄像机距离
+  #endif
+
+  vec2 waveNormal(vec2 p) { // 法线扰动函数，返回二维向量来扰动UV坐标
+    vec2 nm = texture2D(normalMap, p).xy * normalStre;
+    return nm;
+  }
+
+  void main () {
+    float t = timeZoom * cc_time.x;
+    // 两份主纹理叠加
+    vec2 uv1 = vec2(v_uv0.x + t , v_uv0.y);
+    vec2 uv2 = vec2(v_uv0.x - t + 0.3, v_uv0.y + 0.2); // xy交换一下
+    // 启用法线扰动
+    #if USE_NORMALMAP 
+      vec2 nor = waveNormal(v_uv0 * normalZoom);
+      uv1 += nor;
+      uv2 += nor;
+    #endif
+    vec4 o = texture(mainTexture, uv1) + texture(mainTexture, uv2); // texture2D 纹理寻址库函数
+    #if USE_COLOR // 启用颜色
+      vec4 c = color * vec4(colorMul,colorMul,colorMul,1.0);
+      // 计算饱和度        
+      // vec3 satColor = mix(vec4(0.5), o, 1.0);
+      o *= c;
+    #endif
+    // 开启雾效，根据距离计算颜色混合
+    #if USE_FOG
+      // vec4 color1 = vec4(1.0,1.0,1.0,1.0);
+      vec4 fogColor = vec4(120.0/255.0,230.0/255.0,250.0/255.0,1.0);
+      float fogIntensity = 1.0; //雾混合强度
+      float startDist = 1000.0;  //雾最小距离
+      float endDist = 8000.0;    //雾最大距离
+      //根据距离计算混合强度
+      if ( v_cameraDist > endDist )
+        fogIntensity = 0.0;
+      else if ( v_cameraDist < startDist )
+        fogIntensity = 1.0;
+      else
+        fogIntensity = (endDist-v_cameraDist)/(endDist-startDist);
+      o.rgb = mix(fogColor.rgb,o.rgb,fogIntensity); // 将o原来的颜色与雾的颜色按强度值混合
+      // o *= fogIntensity;
+    #endif
+    gl_FragColor = o;
+  }
+}%
+

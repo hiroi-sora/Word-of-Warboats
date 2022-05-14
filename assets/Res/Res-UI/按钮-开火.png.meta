@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "9fab4da1-001b-4e0b-b625-9706db39b2f5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 113,
+  "height": 114,
+  "platformSettings": {},
+  "subMetas": {
+    "按钮-开火": {
+      "ver": "1.0.4",
+      "uuid": "566357e9-c365-45ac-a8d8-59c6aa5504f1",
+      "rawTextureUuid": "9fab4da1-001b-4e0b-b625-9706db39b2f5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 113,
+      "height": 114,
+      "rawWidth": 113,
+      "rawHeight": 114,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

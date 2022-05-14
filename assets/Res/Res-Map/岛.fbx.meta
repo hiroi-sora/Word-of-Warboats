@@ -1,0 +1,219 @@
+{
+  "ver": "1.1.0",
+  "uuid": "1e81a28a-6c3f-4902-aa74-39b37fd46fc1",
+  "scaleFactor": 1,
+  "boneCount": 0,
+  "precomputeJointMatrix": false,
+  "animationFrameRate": 30,
+  "subMetas": {
+    "buffer.bin": {
+      "ver": "1.0.0",
+      "uuid": "afe76227-dfea-40d8-b3d2-160f7308c05e",
+      "name": "buffer.bin",
+      "subMetas": {}
+    },
+    "岛1.mesh": {
+      "ver": "1.0.1",
+      "uuid": "beb0987c-9fc4-4cf5-9e89-9487351bbc1f",
+      "verts": 36,
+      "tris": 20,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -0.0678577423095703,
+        "y": -0.0886896699666977,
+        "z": -0.0473456084728241
+      },
+      "maxPos": {
+        "x": 0.178156808018684,
+        "y": 0.232694625854492,
+        "z": 0
+      },
+      "name": "岛1.mesh",
+      "subMetas": {}
+    },
+    "岛2.mesh": {
+      "ver": "1.0.1",
+      "uuid": "1f68eba3-686a-4e60-adc5-7502abf534c0",
+      "verts": 30,
+      "tris": 16,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -0.0857157707214355,
+        "y": -0.11367067694664,
+        "z": -0.0441718474030495
+      },
+      "maxPos": {
+        "x": 0.103669792413712,
+        "y": 0.0923205837607384,
+        "z": 2.38418573772492e-9
+      },
+      "name": "岛2.mesh",
+      "subMetas": {}
+    },
+    "岛3.mesh": {
+      "ver": "1.0.1",
+      "uuid": "d442cb14-f2c0-4c49-8505-a596f4451499",
+      "verts": 36,
+      "tris": 20,
+      "submeshes": 1,
+      "attributes": [
+        [
+          "a_normal",
+          "a_position",
+          "a_uv0"
+        ]
+      ],
+      "minPos": {
+        "x": -0.120697602629662,
+        "y": -0.0789832100272179,
+        "z": -0.0713021084666252
+      },
+      "maxPos": {
+        "x": 0.103345535695553,
+        "y": 0.0954395458102226,
+        "z": 0
+      },
+      "name": "岛3.mesh",
+      "subMetas": {}
+    },
+    "岛.prefab": {
+      "ver": "1.2.7",
+      "uuid": "eabd8bf0-325a-4860-a960-1368b859cfc5",
+      "optimizationPolicy": "AUTO",
+      "asyncLoadAssets": false,
+      "readonly": true,
+      "content": [
+        {
+          "__type__": "cc.Prefab",
+          "_name": "",
+          "_objFlags": 0,
+          "data": {
+            "__id__": 1
+          }
+        },
+        {
+          "__type__": "cc.Node",
+          "_name": "Sprite",
+          "_objFlags": 0,
+          "_opacity": 255,
+          "_color": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "_cascadeOpacityEnabled": true,
+          "_parent": null,
+          "_anchorPoint": {
+            "__type__": "cc.Vec2",
+            "x": 0.5,
+            "y": 0.5
+          },
+          "_contentSize": {
+            "__type__": "cc.Size",
+            "width": 40,
+            "height": 36
+          },
+          "_children": [],
+          "_skewX": 0,
+          "_skewY": 0,
+          "_localZOrder": 0,
+          "_globalZOrder": 0,
+          "_tag": -1,
+          "_opacityModifyRGB": false,
+          "_reorderChildDirty": false,
+          "_id": "",
+          "_active": true,
+          "_components": [
+            {
+              "__id__": 2
+            }
+          ],
+          "_prefab": {
+            "__id__": 3
+          },
+          "_eulerAngles": {
+            "__type__": "cc.Vec3",
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "_trs": {
+            "__type__": "TypedArray",
+            "ctor": "Float64Array",
+            "array": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "__type__": "cc.Sprite",
+          "_name": "",
+          "_objFlags": 0,
+          "node": {
+            "__id__": 1
+          },
+          "_enabled": true,
+          "_spriteFrame": {
+            "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
+          },
+          "_type": 0,
+          "_sizeMode": 1,
+          "_fillType": 0,
+          "_fillCenter": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          },
+          "_fillStart": 0,
+          "_fillRange": 0,
+          "_isTrimmedMode": true,
+          "_srcBlendFactor": 770,
+          "_dstBlendFactor": 771,
+          "_atlas": null
+        },
+        {
+          "__type__": "cc.PrefabInfo",
+          "root": {
+            "__id__": 1
+          },
+          "asset": null,
+          "fileId": "d7118yAG5lKybkFOAh8koPL"
+        }
+      ],
+      "name": "岛.prefab",
+      "subMetas": {}
+    },
+    "绿.mtl": {
+      "ver": "1.0.3",
+      "uuid": "a924af6f-5dc1-4dc4-b851-1e7a7d5bbf16",
+      "dataAsSubAsset": "{\n  \"__type__\": \"cc.Material\",\n  \"_name\": \"\",\n  \"_objFlags\": 0,\n  \"_native\": \"\",\n  \"_effectAsset\": {\n    \"__uuid__\": \"abc2cb62-7852-4525-a90d-d474487b88f2\"\n  },\n  \"_techniqueIndex\": 0,\n  \"_techniqueData\": {\n    \"0\": {\n      \"props\": {\n        \"diffuseColor\": {\n          \"__type__\": \"cc.Color\",\n          \"r\": 0,\n          \"g\": 160,\n          \"b\": 26,\n          \"a\": 255\n        },\n        \"specularColor\": {\n          \"__type__\": \"cc.Color\",\n          \"r\": 0,\n          \"g\": 0,\n          \"b\": 0,\n          \"a\": 255\n        },\n        \"glossiness\": 6.5\n      },\n      \"defines\": {}\n    }\n  }\n}",
+      "name": "绿.mtl",
+      "subMetas": {}
+    }
+  }
+}

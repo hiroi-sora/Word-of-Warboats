@@ -1,0 +1,72 @@
+// 拖尾特效的shader 
+// 感谢 @黄豆豆 https://forum.cocos.org/t/3d/90640
+
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: vs
+      frag: fs
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      rasterizerState:
+        cullMode: none
+      properties:
+        texture: { value: grey } // 贴图
+        startColor: { value: [1, 1, 1, 1], editor : { type: color } } // 起始颜色
+        endColor: { value: [1, 1, 1, 0], editor : { type: color } } // 结束颜色
+}%
+
+
+CCProgram vs %{
+  precision highp float;
+  #include <cc-global>
+  #include <cc-local>
+  in vec3 a_position;
+  in vec2 a_uv0;
+  out vec2 v_uv0;
+
+  void main () {
+    vec4 pos = vec4(a_position, 1);
+    pos = cc_matViewProj * cc_matWorld * pos;
+    v_uv0 = a_uv0;
+    gl_Position = pos;
+  }
+}%
+
+
+CCProgram fs %{
+  precision highp float;
+
+  in vec2 v_uv0;
+  #if USE_TEXTURE
+    uniform sampler2D texture;
+  #endif
+
+  uniform color {
+    vec4 startColor;
+    vec4 endColor;
+  };
+
+  void main () {
+
+    vec4 o = vec4(1, 1, 1, 1);
+
+    #if USE_TEXTURE
+      o *= texture(texture, v_uv0);
+    #endif
+
+    vec4 fade = endColor - startColor; // 颜色
+    fade *= (1.0-v_uv0.x);
+    fade += startColor;
+    o *= fade;
+
+    gl_FragColor = o;
+  }
+}%

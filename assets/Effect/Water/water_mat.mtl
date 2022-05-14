@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.Material",
+  "_name": "water_mat",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "0f9e5d15-e80b-47e0-bd7c-579573f28cc9"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "tileZoom": 20,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 109,
+          "g": 109,
+          "b": 109,
+          "a": 255
+        },
+        "timeZoom": 0.05,
+        "normalZoom": 0.5,
+        "normalStre": 0.2,
+        "mainTexture": {
+          "__uuid__": "6d72512d-e7b2-4415-85c0-95dc6f4831f6"
+        },
+        "normalMap": {
+          "__uuid__": "40cead7f-fc53-4e89-8ae2-8080a95fdd94"
+        }
+      },
+      "defines": {
+        "USE_COLOR": true,
+        "USE_NORMALMAP": true
+      }
+    }
+  }
+}

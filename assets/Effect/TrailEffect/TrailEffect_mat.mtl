@@ -1,0 +1,33 @@
+{
+  "__type__": "cc.Material",
+  "_name": "TrailEffect_mat",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "5ef4917b-a4cc-4e99-80ea-a47b94e0444b"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "endColor": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 0
+        },
+        "startColor": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        }
+      },
+      "defines": {
+        "USE_TEXTURE": false
+      }
+    }
+  }
+}

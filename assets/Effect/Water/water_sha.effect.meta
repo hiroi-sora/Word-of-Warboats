@@ -1,0 +1,17 @@
+{
+  "ver": "1.0.25",
+  "uuid": "0f9e5d15-e80b-47e0-bd7c-579573f28cc9",
+  "compiledShaders": [
+    {
+      "glsl1": {
+        "vert": "\nprecision highp float;\nuniform float tileZoom;\nattribute vec3 a_position;\nattribute vec2 a_uv0;\nvarying mediump vec2 v_uv0;\nuniform mat4 cc_matWorld;\nuniform mat4 cc_matViewProj;\nvoid main () {\n  vec4 position = vec4(a_position,1.0);\n  v_uv0 = a_uv0 * tileZoom;\n  gl_Position = cc_matViewProj * cc_matWorld * position;\n}",
+        "frag": "\nprecision highp float;\nuniform vec4 cc_time;\nuniform sampler2D mainTexture;\nvarying mediump vec2 v_uv0;\nuniform float timeZoom;\n#if USE_NORMALMAP\n  uniform sampler2D normalMap;\n  uniform float normalZoom;\nuniform float normalStre;\n#endif\n#if USE_COLOR\n  uniform vec4 color;\n#endif\nvec2 waveNormal(vec2 p) {\n  vec2 nm = texture2D(normalMap, p).xy * normalStre;\n  return nm;\n}\nvoid main () {\n  float t = timeZoom * cc_time.x;\n  vec2 uv1 = vec2(v_uv0.x + t , v_uv0.y);\n  vec2 uv2 = vec2(v_uv0.y + t , v_uv0.x);\n  #if USE_NORMALMAP\n    vec2 nor = waveNormal(v_uv0 * normalZoom);\n    uv1 += nor;\n    uv2 += nor;\n  #endif\n  vec4 o = texture2D(mainTexture, uv1) + texture2D(mainTexture, uv2);\n  #if USE_COLOR\n    o *= color;\n  #endif\n  gl_FragColor = o;\n}"
+      },
+      "glsl3": {
+        "vert": "\nprecision highp float;\nuniform MAIN {\n  float tileZoom;\n};\nin vec3 a_position;\nin vec2 a_uv0;\nout mediump vec2 v_uv0;\nuniform CCLocal {\n  mat4 cc_matWorld;\n  mat4 cc_matViewProj;\n};\nvoid main () {\n  vec4 position = vec4(a_position,1.0);\n  v_uv0 = a_uv0 * tileZoom;\n  gl_Position = cc_matViewProj * cc_matWorld * position;\n}",
+        "frag": "\nprecision highp float;\nuniform CCGlobal {\n  vec4 cc_time;\n};\nuniform sampler2D mainTexture;\nin mediump vec2 v_uv0;\nuniform SOMETHING {\n    float timeZoom;\n};\n#if USE_NORMALMAP\n  uniform sampler2D normalMap;\n  uniform NOR {\n    float normalZoom;\n    float normalStre;\n  };\n#endif\n#if USE_COLOR\n  uniform Constant {\n    vec4 color;\n  };\n#endif\nvec2 waveNormal(vec2 p) {\n  vec2 nm = texture2D(normalMap, p).xy * normalStre;\n  return nm;\n}\nvoid main () {\n  float t = timeZoom * cc_time.x;\n  vec2 uv1 = vec2(v_uv0.x + t , v_uv0.y);\n  vec2 uv2 = vec2(v_uv0.y + t , v_uv0.x);\n  #if USE_NORMALMAP\n    vec2 nor = waveNormal(v_uv0 * normalZoom);\n    uv1 += nor;\n    uv2 += nor;\n  #endif\n  vec4 o = texture(mainTexture, uv1) + texture(mainTexture, uv2);\n  #if USE_COLOR\n    o *= color;\n  #endif\n  gl_FragColor = o;\n}"
+      }
+    }
+  ],
+  "subMetas": {}
+}

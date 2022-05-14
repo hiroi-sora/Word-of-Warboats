@@ -1,0 +1,31 @@
+{
+  "__type__": "cc.Material",
+  "_name": "sky_mat",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "014c3373-1ee3-42da-ab15-e37425fe7cf0"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "timeZoom": 0.005,
+        "mainTexture": {
+          "__uuid__": "42e05cd2-1082-40d8-a36e-d1ccedb72efb"
+        },
+        "detailTex": {
+          "__uuid__": "fa126fe9-7d9a-493a-903f-0c9cd9335204"
+        }
+      },
+      "defines": {
+        "USE_TEXTURE": true,
+        "USE_COLOR": false,
+        "FLIP_UV": false,
+        "USE_FOG": true,
+        "USE_VERTEX_COLOR": false,
+        "OUTPUT_TO_GAMMA": true
+      }
+    }
+  }
+}
